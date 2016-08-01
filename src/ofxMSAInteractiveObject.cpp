@@ -260,7 +260,6 @@ void ofxMSAInteractiveObject::_mouseDragged(ofMouseEventArgs &e) {
 		if(isMousePressed(button)) {
 			onDragOutside(x, y, button);
 		}
-        _isMousePressed[button] = false;
 	}
     
     _stateChangeTimestampMillis = ofGetElapsedTimeMillis();
