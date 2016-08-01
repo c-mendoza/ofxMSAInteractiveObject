@@ -14,9 +14,10 @@
 
 //--------------------------------------------------------------
 ofxMSAInteractiveObject::ofxMSAInteractiveObject() {
-	_isMouseOver	= false;
-	enabled		= true;
-	verbose		= false;
+	_isMouseOver	 = false;
+	_isMouseDragging = false;
+	enabled	= true;
+	verbose	= false;
     _stateChangeTimestampMillis = 0;
 	
 	enableAppEvents();
@@ -252,6 +253,7 @@ void ofxMSAInteractiveObject::_mouseDragged(ofMouseEventArgs &e) {
 			onRollOver(x, y);						// call onRollOver
 		}
 		onDragOver(x, y, button);				// and trigger onDragOver
+		_isMouseDragging = true;
 	} else {
 		if(_isMouseOver) {					// if mouse is not over the object, but the flag is true (From previous frame)
 			onRollOut();							// call onRollOut
@@ -261,7 +263,9 @@ void ofxMSAInteractiveObject::_mouseDragged(ofMouseEventArgs &e) {
 			onDragOutside(x, y, button);
 		}
 	}
-    
+	
+	
+	
     _stateChangeTimestampMillis = ofGetElapsedTimeMillis();
 
     mouseDragged(x, y, button);
@@ -284,6 +288,12 @@ void ofxMSAInteractiveObject::_mouseReleased(ofMouseEventArgs &e) {
 	} else {
 		if(isMousePressed(button)) onReleaseOutside(x, y, button);
 	}
+	
+	if (_isMouseDragging) {
+		onDragEnd(x, y, button);
+	}
+	
+	_isMouseDragging = false;
 	_isMousePressed[button] = false;
 
     _stateChangeTimestampMillis = ofGetElapsedTimeMillis();

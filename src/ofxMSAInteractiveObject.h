@@ -63,6 +63,7 @@ public:
 	virtual void onMouseMove(int x, int y) {}                   // called when mouse moves while over object x, y, width, height
 	virtual void onDragOver(int x, int y, int button) {}        // called when mouse moves while over object and button is down
 	virtual void onDragOutside(int x, int y, int button) {}     // called when mouse moves while outside the object after being clicked on it
+	virtual void onDragEnd(int x, int y, int button) {}			// called when the mouse button is released after dragging
 	virtual void onPress(int x, int y, int button) {}           // called when mouse presses while over object
 	virtual void onPressOutside(int x, int y, int button) {}    // called when mouse presses while outside object
 	virtual void onRelease(int x, int y, int button) {}         // called when mouse releases while over object
@@ -100,6 +101,7 @@ public:
 private:
 	bool            _isMouseOver;       // is mouse over the rect
 	map<int, bool>    _isMousePressed;       // is mouse down over the rect (for any given mouse button)
+	bool				_isMouseDragging;
     unsigned long   _stateChangeTimestampMillis;
 	ofRectangle	oldRect;
 };
