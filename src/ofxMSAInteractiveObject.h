@@ -100,7 +100,7 @@ public:
 
 private:
 	bool            _isMouseOver;       // is mouse over the rect
-	map<int, bool>    _isMousePressed;       // is mouse down over the rect (for any given mouse button)
+	::map<int, bool>    _isMousePressed;       // is mouse down over the rect (for any given mouse button)
 	bool				_isMouseDragging;
     unsigned long   _stateChangeTimestampMillis;
 	ofRectangle	oldRect;
